@@ -1,0 +1,15 @@
+{
+  "name": "Schulrecht Hamburg: Lerntrainer zum Schulgesetz",
+  "short_name": "Schulrecht HH",
+  "description": "Hamburgisches Schulgesetz zum Hören und Üben für Lehrkräfte im Vorbereitungsdienst.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f3f1ec",
+  "theme_color": "#1f4e8c",
+  "lang": "de",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
