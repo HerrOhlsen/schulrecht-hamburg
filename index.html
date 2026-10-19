@@ -100,17 +100,13 @@
   .house svg{flex:0 0 auto;} .house .hfl{cursor:pointer;}
   .house .hfill{transition:width .9s cubic-bezier(.2,.8,.2,1);}
   .hstat{flex:1 1 200px;font-size:.92rem;} .hstat b{font-size:1.4rem;color:var(--ok);}
-  .streak{display:inline-block;margin-left:8px;font-weight:800;color:#b2461c;background:#fbeae2;border-radius:20px;padding:1px 9px;font-size:.85rem;}
+  .streak{display:inline-block;margin-left:8px;font-weight:700;color:var(--accent);border:1px solid var(--accent);border-radius:6px;padding:0 7px;font-size:.78rem;}
   .toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(20px);background:#1d1f24;color:#fff;
          padding:10px 18px;border-radius:24px;font-weight:700;font-size:.95rem;opacity:0;transition:opacity .25s,transform .25s;z-index:50;pointer-events:none;max-width:90vw;text-align:center;}
   .toast.on{opacity:1;transform:translateX(-50%) translateY(0);}
-  .conf{position:fixed;width:9px;height:14px;border-radius:2px;pointer-events:none;z-index:60;animation:conf .95s cubic-bezier(.2,.7,.4,1) forwards;}
-  @keyframes conf{0%{transform:translate(0,0) rotate(0);opacity:1;}70%{opacity:1;}100%{transform:translate(var(--dx),var(--dy)) rotate(var(--rot));opacity:0;}}
-  .opt.wrong{animation:shake .35s;} .opt.right{animation:popin .35s;}
-  @keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-7px);}75%{transform:translateX(7px);}}
-  @keyframes popin{0%{transform:scale(1);}50%{transform:scale(1.035);}100%{transform:scale(1);}}
+  .opt.right,.opt.wrong{transition:background .25s,border-color .25s,color .25s;}
   .bar.bump>span{animation:bump .5s;} @keyframes bump{50%{filter:brightness(1.35);}}
-  @media (prefers-reduced-motion: reduce){ .opt.wrong,.opt.right,.bar.bump>span{animation:none;} .house .hfill{transition:none;} }
+  @media (prefers-reduced-motion: reduce){ .bar.bump>span{animation:none;} .house .hfill{transition:none;} }
   @media (max-width:480px){ body{font-size:16px;} }
 </style>
 </head>
@@ -198,20 +194,7 @@
            (audioStart(p.id)!==null && state.mode!=='hoeren' ? '<span class="playlink" data-play="'+p.id+'">▶ anhören</span>':'')+'</div>';
   }
   // ----- motivation: confetti, toast, streak -----
-  var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function burst(el, big){
-    if(REDUCED || !el) return;
-    var r = el.getBoundingClientRect(), cx = r.left + r.width/2, cy = r.top + r.height/2;
-    var cols = ['#1f4e8c','#d39b22','#1d7a4f','#b2461c','#9fbbe4','#f0c75e'], n = big ? 46 : 18;
-    for(var i=0;i<n;i++){
-      var c = document.createElement('span'); c.className = 'conf';
-      var ang = Math.random()*Math.PI*2, dist = (big?160:90) + Math.random()*(big?180:80);
-      c.style.left = cx+'px'; c.style.top = cy+'px'; c.style.background = cols[i%cols.length];
-      c.style.setProperty('--dx', Math.cos(ang)*dist+'px'); c.style.setProperty('--dy', (Math.sin(ang)*dist*0.6 + 60 + Math.random()*80)+'px');
-      c.style.setProperty('--rot', (Math.random()*720-360)+'deg');
-      document.body.appendChild(c); setTimeout((function(x){ return function(){ x.remove(); }; })(c), 1100);
-    }
-  }
+  function burst(){}
   var toastEl = null, toastT = null;
   function toast(msg){
     if(!toastEl){ toastEl = document.createElement('div'); toastEl.className = 'toast'; document.body.appendChild(toastEl); }
@@ -219,18 +202,16 @@
     clearTimeout(toastT); toastT = setTimeout(function(){ toastEl.classList.remove('on'); }, 2000);
   }
   function bumpBar(){ var b = document.querySelector('.bar'); if(!b) return; b.classList.remove('bump'); void b.offsetWidth; b.classList.add('bump'); }
-  function answered(right, el){
+  function answered(right){
     if(right){
       state.streak++; if(state.streak > store.best){ store.best = state.streak; saveStore(); }
-      var big = state.streak > 0 && state.streak % 5 === 0;
-      burst(el, big); bumpBar();
-      if(big) toast(state.streak+' richtig in Folge! 🔥');
+      bumpBar();
+      if(state.streak % 5 === 0) toast(state.streak+' in Folge richtig');
     } else {
-      if(state.streak >= 3) toast('Serie von '+state.streak+' gerissen. Weiter!');
       state.streak = 0;
     }
   }
-  function streakHtml(){ return state.streak >= 2 ? '<span class="streak">🔥 '+state.streak+'</span>' : ''; }
+  function streakHtml(){ return state.streak >= 2 ? '<span class="streak" title="richtige Antworten in Folge">Serie '+state.streak+'</span>' : ''; }
   function teilStats(n){ var ps = PARAS.filter(function(p){ return p.teil===n && !p.aufgehoben; });
     return {sure: ps.filter(function(p){ return store.status[p.id]==='sure'; }).length, total: ps.length}; }
 
@@ -267,14 +248,14 @@
       svg += '<g class="hfl" data-teil="'+f[0]+'"><rect x="'+W0+'" y="'+f[1]+'" width="'+(W1-W0)+'" height="'+h+'" fill="'+(f[0]===1?'#d6d3cb':'#fff')+'" stroke="#1d1f24" stroke-width="2.5"/>'+
         '<rect class="hfill" x="'+W0+'" y="'+f[1]+'" height="'+h+'" width="0" data-w="'+((W1-W0)*ratio)+'" fill="'+(done?'#d39b22':'#1d7a4f')+'" opacity="0.8"/>'+
         '<text x="'+(W0+8)+'" y="'+(f[1]+h/2+4)+'" font-size="12" font-weight="700" fill="#1d1f24">Teil '+f[0]+'</text>'+
-        '<text x="'+(W1-8)+'" y="'+(f[1]+h/2+4)+'" font-size="12" text-anchor="end" fill="#1d1f24">'+(done?'★ ':'')+s.sure+'/'+s.total+'</text></g>';
+        '<text x="'+(W1-8)+'" y="'+(f[1]+h/2+4)+'" font-size="12" text-anchor="end" fill="#1d1f24">'+(done?'✓ ':'')+s.sure+'/'+s.total+'</text></g>';
     });
     svg += '<line x1="10" x2="270" y1="330" y2="330" stroke="#1d1f24" stroke-width="3"/></svg>';
     var all = PARAS.filter(function(p){ return !p.aufgehoben; }), sure = all.filter(function(p){ return store.status[p.id]==='sure'; }).length;
     var next = null; for(var n=1;n<=9;n++){ var s = teilStats(n); if(s.sure < s.total && (!next || s.total - s.sure < next.left)) next = {n:n, left: s.total - s.sure}; }
     var stat = '<div class="hstat"><div><b>'+sure+'</b> von '+all.length+' Paragrafen sicher</div>'+
-      '<div class="sub" style="margin:6px 0">Jedes Stockwerk füllt sich mit den Paragrafen, die du im Paragraf-Recall als sicher markierst. Ein komplettes Stockwerk wird gold.</div>'+
-      (next ? '<div style="font-size:.9rem">Am nächsten dran: <b style="font-size:1rem;color:var(--accent)">Teil '+next.n+'</b>, noch '+next.left+' bis komplett.</div>' : '<div><b style="color:var(--gold)">Alles gold. Stark!</b></div>')+
+      '<div class="sub" style="margin:6px 0">Jedes Stockwerk füllt sich mit den Paragrafen, die im Paragraf-Recall als sicher markiert sind. Vollständige Stockwerke werden gold.</div>'+
+      (next ? '<div style="font-size:.9rem">Am nächsten dran: <b style="font-size:1rem;color:var(--accent)">Teil '+next.n+'</b>, noch '+next.left+' bis komplett.</div>' : '<div><b style="color:var(--gold)">Alle Teile vollständig sicher.</b></div>')+
       '<div class="sub" style="margin-top:6px">Stockwerk antippen: diesen Teil üben.</div></div>';
     return '<div class="panel house">'+svg+stat+'</div>';
   }
@@ -368,9 +349,8 @@
     function rate(v){
       var before = teilStats(p.teil); store.status[p.id]=v; saveStore(); var after = teilStats(p.teil);
       if(v==='sure'){
-        burst(document.getElementById('rSure'), after.sure===after.total && before.sure<before.total);
-        if(after.sure===after.total && before.sure<before.total) toast('Teil '+p.teil+' komplett sicher! Stockwerk ist gold ★');
-        else toast('Sicher ✓ · Teil '+p.teil+': '+after.sure+'/'+after.total);
+        if(after.sure===after.total && before.sure<before.total) toast('Teil '+p.teil+' vollständig sicher');
+        else toast('Teil '+p.teil+': '+after.sure+' von '+after.total+' sicher');
       }
       state.idx=(state.idx+1)%list.length; render(); bumpBar();
     }
@@ -409,13 +389,13 @@
       q.done = true; store.wer.total++; if(right) store.wer.right++; store.werStatus[it.id] = right ? 'sure' : 'weak'; saveStore();
       Array.prototype.forEach.call(view.querySelectorAll('.opt'), function(x){ if(x.getAttribute('data-k')===it.a) x.classList.add('right'); });
       var a = document.getElementById('wAnswer');
-      a.innerHTML = '<div class="kurz"><b>'+(right?'Richtig':'Leider nein')+'</b>'+esc(it.b)+'</div>' +
+      a.innerHTML = '<div class="kurz"><b>'+(right?'Richtig':'Falsch')+'</b>'+esc(it.b)+'</div>' +
         (p ? '<div class="ptitle" style="font-size:1rem"><span class="nr">'+esc(p.label)+'</span>'+esc(p.title)+(audioStart(p.id)!==null?'<span class="playlink" data-play="'+p.id+'">▶ anhören</span>':'')+'</div><details><summary>Wortlaut</summary>'+lawHtml(p)+'</details>' : '');
       a.classList.remove('hidden'); document.getElementById('wNextBtn').classList.remove('hidden'); bindPlayLinks(); updateProgress();
     }
     Array.prototype.forEach.call(view.querySelectorAll('.opt'), function(o){
       o.onclick = function(){ if(q.done) return; var right = o.getAttribute('data-k')===it.a; if(!right) o.classList.add('wrong'); finish(right);
-        answered(right, right ? o : null); var pos = view.querySelector('.pos'); if(pos){ var sk = pos.querySelector('.streak'); if(sk) sk.remove(); pos.insertAdjacentHTML('beforeend', streakHtml()); } };
+        answered(right); var pos = view.querySelector('.pos'); if(pos){ var sk = pos.querySelector('.streak'); if(sk) sk.remove(); pos.insertAdjacentHTML('beforeend', streakHtml()); } };
     });
     function step(d){ state.werIdx = (state.werIdx + d + list.length) % list.length; state.werItem = null; renderWer(); }
     document.getElementById('wNextBtn').onclick = function(){ step(1); };
@@ -445,10 +425,10 @@
         store.eoStatus[it.id] = right ? 'sure' : 'weak'; saveStore();
         Array.prototype.forEach.call(view.querySelectorAll('.opt'), function(x){ if(x.getAttribute('data-k')===it.k) x.classList.add('right'); else if(x===o) x.classList.add('wrong'); });
         var a = document.getElementById('eAnswer');
-        a.innerHTML = '<div class="kurz"><b>'+(right?'Richtig':'Leider nein')+'</b>'+esc(it.b)+'</div>' +
+        a.innerHTML = '<div class="kurz"><b>'+(right?'Richtig':'Falsch')+'</b>'+esc(it.b)+'</div>' +
           (p ? '<details><summary>Wortlaut § 49</summary>'+lawHtml(p)+'</details>' : '');
         a.classList.remove('hidden'); document.getElementById('eNextBtn').classList.remove('hidden'); updateProgress();
-        answered(right, right ? o : null); var pos = view.querySelector('.pos'); if(pos){ var sk = pos.querySelector('.streak'); if(sk) sk.remove(); pos.insertAdjacentHTML('beforeend', streakHtml()); } };
+        answered(right); var pos = view.querySelector('.pos'); if(pos){ var sk = pos.querySelector('.streak'); if(sk) sk.remove(); pos.insertAdjacentHTML('beforeend', streakHtml()); } };
     });
     function step(d){ state.eoIdx = (state.eoIdx + d + list.length) % list.length; renderEO(); }
     document.getElementById('eNextBtn').onclick = function(){ step(1); };

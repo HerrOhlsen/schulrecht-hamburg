@@ -1,0 +1,30 @@
+{
+  "koerbe": {"E": "Erziehungsmaßnahme", "O": "Ordnungsmaßnahme", "X": "Unzulässig oder keins von beiden"},
+  "items": [
+    {"m": "Ermahnung und Absprache mit dem Schüler", "k": "E", "b": "§ 49 Absatz 2 nennt Ermahnungen und Absprachen ausdrücklich als Erziehungsmaßnahmen. Jede Lehrkraft darf sie selbst treffen."},
+    {"m": "Kurzfristiger Ausschluss vom Unterricht, etwa für den Rest der Stunde", "k": "E", "b": "Der kurzfristige Ausschluss vom Unterricht ist nach § 49 Absatz 2 eine Erziehungsmaßnahme. Die Aufsicht muss trotzdem gesichert bleiben (§ 31)."},
+    {"m": "Ausschluss vom Unterricht für drei Unterrichtstage", "k": "O", "b": "Ein Ausschluss für einen bis höchstens zehn Unterrichtstage ist Ordnungsmaßnahme nach § 49 Absatz 4 Nummer 2. Zuständig: Klassenkonferenz unter Vorsitz der Schulleitung."},
+    {"m": "Nachholen von versäumtem Unterricht am Nachmittag", "k": "E", "b": "Das Nachholen von Unterricht steht in § 49 Absatz 2 im Katalog der Erziehungsmaßnahmen."},
+    {"m": "Handy für den Rest des Schultages einbehalten", "k": "E", "b": "Die zeitweilige Wegnahme von Gegenständen ist Erziehungsmaßnahme nach § 49 Absatz 2. Zeitweilig heißt: in der Regel bis Stundenende oder Tagesende, nicht über Wochen."},
+    {"m": "Handy bis zum Schuljahresende einbehalten", "k": "X", "b": "Das ist keine zeitweilige Wegnahme mehr, sondern unverhältnismäßig (§ 49 Absatz 1 Satz 3). Weder zulässige Erziehungs- noch Ordnungsmaßnahme."},
+    {"m": "Nachschau in der Jackentasche, um einen gefährlichen Gegenstand sicherzustellen", "k": "E", "b": "§ 49 Absatz 2 erlaubt die im Einzelfall erforderliche Nachschau in Kleidung oder mitgeführten Sachen als Teil der Wegnahme. Nur bei konkretem Anlass, nicht als Routinekontrolle."},
+    {"m": "Soziale Aufgabe für die Schule, etwa den Schulhof aufräumen", "k": "E", "b": "Die Auferlegung sozialer Aufgaben für die Schule ist Erziehungsmaßnahme nach § 49 Absatz 2. Die Grundsätze dafür legt die Schulkonferenz fest (§ 53 Absatz 4 Nummer 16)."},
+    {"m": "Hundertmal den Satz „Ich darf nicht stören“ abschreiben", "k": "X", "b": "Reine Strafarbeiten ohne pädagogischen Bezug gelten als entwürdigend; § 49 Absatz 1 Satz 4 verbietet entwürdigende Erziehungsmaßnahmen. Zulässig wäre eine inhaltlich sinnvolle Aufgabe."},
+    {"m": "Teilnahme an einem Mediationsverfahren", "k": "E", "b": "Die Teilnahme an einem Mediationsverfahren steht in § 49 Absatz 2 im Katalog der Erziehungsmaßnahmen."},
+    {"m": "Teilnahme an einem innerschulischen sozialen Trainingskurs", "k": "E", "b": "Innerschulische soziale Trainingsmaßnahmen sind Erziehungsmaßnahme nach § 49 Absatz 2."},
+    {"m": "Wiedergutmachung des angerichteten Schadens, etwa die beschmierte Wand reinigen", "k": "E", "b": "Die Wiedergutmachung des angerichteten Schadens ist nach § 49 Absatz 2 Erziehungsmaßnahme."},
+    {"m": "Schriftlicher Verweis", "k": "O", "b": "Der schriftliche Verweis ist die mildeste Ordnungsmaßnahme der Sekundarstufen, § 49 Absatz 4 Nummer 1. Klassenkonferenz unter Vorsitz der Schulleitung, vorher Anhörung."},
+    {"m": "Ausschluss von der Klassenfahrt", "k": "O", "b": "Der Ausschluss von einer Schulfahrt ist Ordnungsmaßnahme, in der Sekundarstufe § 49 Absatz 4 Nummer 2, in der Grundschule Absatz 3 Nummer 1."},
+    {"m": "Umsetzung in die Parallelklasse", "k": "O", "b": "Die Umsetzung in eine Parallelklasse ist Ordnungsmaßnahme (§ 49 Absatz 4 Nummer 3, Grundschule Absatz 3 Nummer 2). Zuständig ist die Lehrerkonferenz, in der Grundschule mit schulpsychologischer Stellungnahme."},
+    {"m": "Androhung der Überweisung an eine andere Schule", "k": "O", "b": "§ 49 Absatz 4 Nummer 4. Entscheidet die Lehrerkonferenz oder ihr Ausschuss."},
+    {"m": "Überweisung an eine andere Schule mit gleichem Abschluss", "k": "O", "b": "§ 49 Absatz 4 Nummer 5, nur bei schwerem Fehlverhalten. Entscheidet die Behörde auf Antrag der Lehrerkonferenz; Eltern werden informiert, Jugendamt wird geprüft."},
+    {"m": "Entlassung aus der Schule", "k": "O", "b": "§ 49 Absatz 4 Nummer 6, nur bei schwerem Fehlverhalten und nur, wenn die Schulpflicht erfüllt ist. Entscheidet die Behörde."},
+    {"m": "Vorläufige Beurlaubung durch die Schulleitung für fünf Tage, bis die Konferenz tagt", "k": "X", "b": "Das ist weder Erziehungs- noch Ordnungsmaßnahme, sondern die Eilmaßnahme der Schulleitung nach § 49 Absatz 9 (höchstens zehn Unterrichtstage), bis über eine Ordnungsmaßnahme entschieden ist."},
+    {"m": "Ohrfeige nach einer Beleidigung", "k": "X", "b": "Körperliche Züchtigung ist nach § 49 Absatz 1 Satz 4 verboten. Dienstrechtlich ein Dienstvergehen, strafrechtlich Körperverletzung."},
+    {"m": "Zwei Ordnungsmaßnahmen wegen desselben Vorfalls: Verweis plus Ausschluss von der Klassenfahrt", "k": "X", "b": "Nach § 49 Absatz 1 Satz 7 darf aus Anlass desselben Fehlverhaltens höchstens eine Ordnungsmaßnahme getroffen werden. Erziehungs- und Ordnungsmaßnahme dürfen dagegen verknüpft werden."},
+    {"m": "Gespräch mit der Beratungslehrkraft als Auflage nach wiederholten Konflikten", "k": "E", "b": "Hilfestellung durch Beratungslehrkraft, Beratungsdienst oder Schulsozialbetreuung gehört nach § 49 Absatz 1 Satz 5 zu den Erziehungsmaßnahmen und hat Vorrang vor Ordnungsmaßnahmen."},
+    {"m": "Note im Arbeits- und Sozialverhalten herabsetzen, um zu bestrafen", "k": "X", "b": "Leistungs- und Verhaltensbeurteilung nach § 44 ist keine Maßnahme bei Erziehungskonflikten. Sie bildet beobachtetes Verhalten ab und darf nicht als Sanktion eingesetzt werden."},
+    {"m": "Ausschluss von der Schulfahrt in der Grundschule", "k": "O", "b": "In der Grundschule sind nach § 49 Absatz 3 nur drei Ordnungsmaßnahmen möglich: Ausschluss von der Schulfahrt, Umsetzung in eine Parallelklasse, Überweisung an eine andere Schule."},
+    {"m": "Schriftlicher Verweis in der Grundschule", "k": "X", "b": "Den schriftlichen Verweis gibt es nur in den Sekundarstufen (§ 49 Absatz 4). Der Katalog der Grundschule in Absatz 3 kennt ihn nicht."}
+  ]
+}
