@@ -33,3 +33,9 @@ Für den Einstieg:
 - Gesetzestext: Hamburgisches Schulgesetz in der Ausgabe der Behörde für Schule und Berufsbildung, Stand der letzten Änderung 3. Mai 2023. Spätere Änderungen sind nicht eingearbeitet; maßgeblich ist die aktuelle Fassung auf [landesrecht-hamburg.de](https://www.landesrecht-hamburg.de/bsha/document/jlr-SchulGHArahmen).
 - Prüfungsformat: Verwaltungsvorschrift zur VVZS vom 6. Juni 2025 (Landesinstitut Hamburg), Kapitel C.
 - Kurzfassungen und Fälle sind Lernhilfen, keine Rechtsberatung und kein Angebot der Behörde oder des Landesinstituts. Das Dienstrecht ist nicht enthalten.
+
+## Lizenz
+
+- **Code** (App, Service Worker, Skripte): MIT, siehe [`LICENSE`](LICENSE).
+- **Inhalte** (Kurzfassungen, Fälle, Übungsaufgaben, Hörbuch, Videos): [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.de), siehe [`LICENSE-INHALTE.md`](LICENSE-INHALTE.md).
+- **Gesetzestext:** als amtliches Werk gemeinfrei (§ 5 UrhG).
